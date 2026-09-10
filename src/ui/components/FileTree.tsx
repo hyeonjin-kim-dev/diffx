@@ -72,6 +72,16 @@ function buildTree(files: FileDiffMetadata[]): TreeNode[] {
   return root
 }
 
+function getFileChangeCounts(file: FileDiffMetadata): { additions: number; deletions: number } {
+  let additions = 0
+  let deletions = 0
+  for (const hunk of file.hunks) {
+    additions += hunk.additionLines
+    deletions += hunk.deletionLines
+  }
+  return { additions, deletions }
+}
+
 function inferChangeType(file: FileDiffMetadata, untrackedFiles: Set<string>): string {
   if (untrackedFiles.has(file.name)) return 'untracked'
   // parsePatchFiles doesn't always set changeType, infer from object IDs
@@ -196,6 +206,7 @@ function TreeFile({
 }) {
   const filePath = node.file?.name ?? node.path
   const isActive = activeFile === filePath
+  const { additions, deletions } = node.file ? getFileChangeCounts(node.file) : { additions: 0, deletions: 0 }
 
   return (
     <li>
@@ -207,6 +218,12 @@ function TreeFile({
       >
         {getFileIcon(node.file, viewed, untrackedFiles)}
         <span className="ft-file-name">{node.name}</span>
+        {(additions > 0 || deletions > 0) && (
+          <span className="ft-change-stats">
+            {additions > 0 && <span className="stat-additions">+{additions}</span>}
+            {deletions > 0 && <span className="stat-deletions">-{deletions}</span>}
+          </span>
+        )}
         {commentCount > 0 && (
           <span className="ft-comment-count">
             <MessageSquare size={14} />
