@@ -898,6 +898,21 @@ body {
     white-space: nowrap;
 }
 
+/* Change stats */
+.ft-change-stats {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    font-size: 11px;
+    flex-shrink: 0;
+}
+
+.ft-change-stats .stat-additions,
+.ft-change-stats .stat-deletions {
+    font-weight: 600;
+}
+
 /* Comment count */
 .ft-comment-count {
     display: flex;
@@ -907,6 +922,10 @@ body {
     color: var(--text-secondary);
     font-size: 12px;
     flex-shrink: 0;
+}
+
+.ft-change-stats + .ft-comment-count {
+    margin-left: 0;
 }
 
 /* Comment tracker */
