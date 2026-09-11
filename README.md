@@ -6,8 +6,10 @@ A local code review tool designed for the coding agent workflow. Review AI-gener
 
 ## Install
 
+This fork publishes to npm as `@hyeonjin-kim-dev/diffx-cli` (upstream publishes `diffx-cli`).
+
 ```bash
-npm install -g diffx-cli
+npm install -g @hyeonjin-kim-dev/diffx-cli
 ```
 
 ## Usage
@@ -41,7 +43,7 @@ Examples:
 
 - **Split / Unified view** — Toggle between side-by-side and inline diff
 - **Syntax highlighting** — Powered by Shiki with GitHub themes
-- **File tree** — Hierarchical file browser with search filter and file change-type icons
+- **File tree** — Hierarchical file browser with search filter, per-file +N/-N change counts, and file change-type icons
 - **Inline comments** — Click the `+` button on any line to add a review comment
 - **Comment replies** — AI agents can reply to comments via API, displayed with bot avatar in the UI
 - **Comment status tracker** — Sidebar widget showing open, replied, and resolved comment counts with click-to-navigate links
